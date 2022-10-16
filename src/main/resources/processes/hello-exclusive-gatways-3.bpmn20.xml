@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1bzguv3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="10.2.0">
+  <bpmn:process id="helloWorld">
+    <bpmn:startEvent id="StartEvent_0uod0t7">
+      <bpmn:outgoing>Flow_11ljs02</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:scriptTask id="Activity_0p2zip0" name="Print if a &#62; 10" scriptFormat="groovy">
+      <bpmn:incoming>Flow_1uetmzv</bpmn:incoming>
+      <bpmn:outgoing>Flow_1qrh2gt</bpmn:outgoing>
+      <bpmn:script>
+        def vars = execution.getVariables()
+        System.out.println(vars.a + " is lower or equals to 10")
+      </bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:endEvent id="Event_0sz7s71">
+      <bpmn:incoming>Flow_1qrh2gt</bpmn:incoming>
+      <bpmn:incoming>Flow_1bgwkph</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_11ljs02" sourceRef="StartEvent_0uod0t7" targetRef="Gateway_00qzrz2" />
+    <bpmn:sequenceFlow id="Flow_1qrh2gt" sourceRef="Activity_0p2zip0" targetRef="Event_0sz7s71" />
+    <bpmn:exclusiveGateway id="Gateway_00qzrz2">
+      <bpmn:incoming>Flow_11ljs02</bpmn:incoming>
+      <bpmn:outgoing>Flow_1uetmzv</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1tymkzw</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1uetmzv" sourceRef="Gateway_00qzrz2" targetRef="Activity_0p2zip0">
+      <bpmn:conditionExpression><![CDATA[ ${a <= 10} ]]></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:scriptTask id="Activity_1gx8b8n" name="Print if a &#60;= 10" scriptFormat="groovy">
+      <bpmn:incoming>Flow_1tymkzw</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bgwkph</bpmn:outgoing>
+      <bpmn:script>
+        def vars = execution.getVariables()
+        System.out.println(vars.a + " is greater than 10")
+      </bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_1tymkzw" sourceRef="Gateway_00qzrz2" targetRef="Activity_1gx8b8n">
+      <bpmn:conditionExpression><![CDATA[ ${a > 10} ]]></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1bgwkph" sourceRef="Activity_1gx8b8n" targetRef="Event_0sz7s71" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="helloWorld">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_0uod0t7">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_00qzrz2_di" bpmnElement="Gateway_00qzrz2" isMarkerVisible="true">
+        <dc:Bounds x="555" y="95" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p2zip0_di" bpmnElement="Activity_0p2zip0">
+        <dc:Bounds x="850" y="350" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1jeewyh" bpmnElement="Activity_1gx8b8n">
+        <dc:Bounds x="850" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0sz7s71_di" bpmnElement="Event_0sz7s71">
+        <dc:Bounds x="1302" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_11ljs02_di" bpmnElement="Flow_11ljs02">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="555" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qrh2gt_di" bpmnElement="Flow_1qrh2gt">
+        <di:waypoint x="950" y="390" />
+        <di:waypoint x="1090" y="390" />
+        <di:waypoint x="1090" y="250" />
+        <di:waypoint x="1302" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1uetmzv_di" bpmnElement="Flow_1uetmzv">
+        <di:waypoint x="580" y="145" />
+        <di:waypoint x="580" y="390" />
+        <di:waypoint x="850" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tymkzw_di" bpmnElement="Flow_1tymkzw">
+        <di:waypoint x="605" y="120" />
+        <di:waypoint x="850" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bgwkph_di" bpmnElement="Flow_1bgwkph">
+        <di:waypoint x="950" y="120" />
+        <di:waypoint x="1090" y="120" />
+        <di:waypoint x="1090" y="250" />
+        <di:waypoint x="1302" y="250" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
