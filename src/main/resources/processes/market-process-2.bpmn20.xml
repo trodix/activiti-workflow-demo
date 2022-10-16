@@ -8,7 +8,8 @@
       <bpmn:incoming>Flow_11ljs02</bpmn:incoming>
       <bpmn:outgoing>Flow_1qrh2gt</bpmn:outgoing>
       <bpmn:script>
-        System.out.println("Hello world")
+        def vars = execution.getVariables()
+        System.out.println("Hello world " + vars.a)
       </bpmn:script>
     </bpmn:scriptTask>
     <bpmn:endEvent id="Event_0sz7s71">
